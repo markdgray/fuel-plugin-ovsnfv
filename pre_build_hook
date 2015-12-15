@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -eux
+
+BUILD_FOR=${BUILD_FOR:-ubuntu}
+DIR="$(dirname `readlink -f $0`)"
+
+INCLUDE_DEPENDENCIES=${INCLUDE_DEPENDENCIES:-true}
+http_proxy=${http_proxy}
+https_proxy=${https_proxy}
+ovs_ref=${ovs_ref:-master}
+dpdk_ref=${dpdk_ref:-2.1.0}
+networking_ovs_dpdk=${networking_ovs_dpdk:-master}
+
+# sudo apt-get install -qq --reinstall --print-uris bash | perl -lne "/'(.*?)'/;print \$1"
+if [ "$INCLUDE_DEPENDENCIES" = true ]
+then
+  wget --content-disposition -N -i  "${DIR}/ovs_package/${BUILD_FOR}/dependencies.txt"
+fi
+
+wget https://github.com/openvswitch/ovs/archive/${ovs_ref}.zip -O ${DIR}/ovs_package/${BUILD_FOR}/ovs.zip
+wget http//www.dpdk.org/browse/dpdk/snapshot/dpdk-${dpdk_ref}.zip -O ${DIR}/ovs_package/${BUILD_FOR}/dpdk.zip
+wget https://github.com/openstack/networking-ovs-dpdk/archive/${networking_ovs_dpdk}.zip -O ${DIR}/ovs_package/${BUILD_FOR}/networking_ovs_dpdk.zip 
