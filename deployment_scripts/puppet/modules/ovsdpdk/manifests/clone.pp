@@ -32,7 +32,7 @@ class ovsdpdk::clone(
   }
 
   exec { "wget networking_ovs_dpdk":
-    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking_ovs_dpdk.zip && unzip networking_ovs_dpdk.zip && mv networking-ovs-dpdk-master $networking_ovs_dpdk_dir",
+    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking-ovs-dpdk.zip && unzip networking-ovs-dpdk.zip && mv networking-ovs-dpdk-master $networking_ovs_dpdk_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
 
   }
