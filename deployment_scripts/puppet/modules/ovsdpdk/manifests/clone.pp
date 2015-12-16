@@ -17,6 +17,10 @@ class ovsdpdk::clone(
     mode   => '0755',
   }
 
+  package { 'git':
+    ensure   => installed,
+  }
+
   package { 'unzip':
     ensure   => installed,
   }
