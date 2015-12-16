@@ -1,22 +1,5 @@
-- id: ovs_install_primary_controller
-  role: ['primary-controller']
-  stage: post_deployment/8101 
-  type: puppet
-  parameters:
-    puppet_manifest: puppet/manifests/ovs-install-ovsnfv.pp
-    puppet_modules: puppet/modules:/etc/puppet/modules
-    timeout: 720
-- id: ovs_install_controller
-  role: ['controller']
-  stage: post_deployment/8101
-  type: puppet
-  parameters:
-    puppet_manifest: puppet/manifests/ovs-install-ovsnfv.pp
-    puppet_modules: puppet/modules:/etc/puppet/modules
-    timeout: 720
-- id: ovs_install_compute
-  role: ['compute']
-  stage: post_deployment/8101 
+- role: ['compute']
+  stage: post_deployment/8999
   type: puppet
   parameters:
     puppet_manifest: puppet/manifests/ovs-install-ovsnfv.pp
