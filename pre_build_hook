@@ -32,7 +32,7 @@ wget http://www.dpdk.org/browse/dpdk/snapshot/dpdk-${dpdk_ref}.zip -O ${DIR}/rep
 rm -rf ${TMP}/networking-ovs-dpdk
 git clone https://github.com/openstack/networking-ovs-dpdk ${TMP}/networking-ovs-dpdk
 cd ${TMP}
-zip -r ${DIR}/repositories/${BUILD_FOR}/networking-ovs-dpdk.zip networking-ovs-dpdk/* networking-ovs-dpdk/.*
+zip -r ${DIR}/repositories/${BUILD_FOR}/networking-ovs-dpdk.zip networking-ovs-dpdk
 
 rm -rf ${TMP}
 
