@@ -17,18 +17,23 @@ class ovsdpdk::clone(
     mode   => '0755',
   }
 
+  package { 'unzip':
+    ensure   => installed,
+  }
+
   exec { "wget dpdk":
-    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-mark-0.0.1/repositories/ubuntu/dpdk.zip && unzip dpdk.zip -d $ovs_dpdk_dir",
+    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.zip && unzip dpdk.zip && mv dpdk-2.1.0 $ovs_dpdk_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "wget ovs":
-    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-mark-0.0.1/repositories/ubuntu/ovs.zip && unzip ovs.zip -d $ovs_dir",
+    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.zip && unzip ovs.zip && mv ovs-master $ovs_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "wget networking_ovs_dpdk":
-    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-mark-0.0.1/repositories/ubuntu/networking_ovs_dpdk.zip && unzip networking_ovs_dpdk.zip -d $networking_ovs_dpdk_dir",
+    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking_ovs_dpdk.zip && unzip networking_ovs_dpdk.zip && mv networking-ovs-dpdk-master $networking_ovs_dpdk_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
+
   }
 }
