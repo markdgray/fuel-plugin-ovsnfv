@@ -1,4 +1,5 @@
 $fuel_settings = parseyaml(file('/etc/compute.yaml'))
+
 if $operatingsystem == 'Ubuntu' {
   class { '::ovsdpdk':
     ovs_bridge_mappings => '',

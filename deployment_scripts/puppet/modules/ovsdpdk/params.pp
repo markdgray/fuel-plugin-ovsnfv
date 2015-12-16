@@ -10,7 +10,7 @@ class ovsdpdk::params {
   $ovs_db_conf              = "${ovs_db_conf_dir}/conf.db"
 
   # General config
-  $plugin_dir               = '/etc/puppet/modules/fuel-plugin-ovsnfv-0.0'
+  $plugin_dir               = '/etc/fuel/plugins/fuel-plugin-ovsnfv-0.0'
   $dest                     = '/opt/code'
   $nova_conf_dir            = '/etc/nova'
   $nova_conf                = "${nova_conf_dir}/nova.conf"
