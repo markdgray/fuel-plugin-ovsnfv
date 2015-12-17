@@ -47,5 +47,9 @@ class ovsdpdk::clone(
     require => Package['unzip'],
   }
 
+  exec { "install pbr":
+    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/pbr-1.8.1-py2.py3-none-any.whl && pip install pbr-1.8.1-py2.py3-none-any.whl"
+    path   => "/usr/bin:/usr/sbin:/bin:/sbin",
+    require => Package['python-pip'],
   }
 }
