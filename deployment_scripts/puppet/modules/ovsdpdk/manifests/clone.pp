@@ -32,16 +32,20 @@ class ovsdpdk::clone(
   exec { "wget dpdk":
     command => "rm -rf dpdk.zip $ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.zip && unzip dpdk.zip && mv dpdk-2.1.0 $ovs_dpdk_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
+    require => Package['unzip'],
   }
 
   exec { "wget ovs":
     command => "rm -rf ovs.zip $ovs_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.zip && unzip ovs.zip && mv ovs-master $ovs_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
+    require => Package['unzip'],
   }
 
   exec { "wget networking_ovs_dpdk":
     command => "rm -rf networking-ovs-dpdk.zip $networking_ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking-ovs-dpdk.zip && unzip networking-ovs-dpdk.zip && mv networking-ovs-dpdk $networking_ovs_dpdk_dir",
     path   => "/usr/bin:/usr/sbin:/bin:/sbin",
+    require => Package['unzip'],
+  }
 
   }
 }
