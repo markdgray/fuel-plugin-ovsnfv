@@ -29,4 +29,6 @@ http://archive.ubuntu.com/ubuntu/pool/main/s/six/python-six-whl_1.5.2-1ubuntu1_a
 http://archive.ubuntu.com/ubuntu/pool/main/p/python-urllib3/python-urllib3-whl_1.7.1-1ubuntu4_all.deb
 http://archive.ubuntu.com/ubuntu/pool/main/w/wheel/python-wheel_0.24.0-1~ubuntu1_all.deb
 http://archive.ubuntu.com/ubuntu/pool/main/p/python-pbr/python-pbr_0.7.0-0ubuntu2_all.deb
+http://archive.ubuntu.com/ubuntu/pool/universe/c/crudini/crudini_0.3-1_amd64.deb
+http://archive.ubuntu.com/ubuntu/pool/universe/p/python-iniparse/python-iniparse_0.4-2.1build1_all.deb
 https://pypi.python.org/packages/py2.py3/p/pbr/pbr-1.8.1-py2.py3-none-any.whl
