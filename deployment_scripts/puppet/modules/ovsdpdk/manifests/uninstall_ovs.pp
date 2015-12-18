@@ -18,10 +18,14 @@ class ovsdpdk::uninstall_ovs (
 
   exec { "/usr/sbin/service ${openvswitch_agent} stop":
     user => root,
+    path => "/usr/bin:/bin",
+    onlyif => "ps aux |  grep -vws grep | grep -ws neutron-server"
   }
 
   exec { '/usr/sbin/service neutron-server stop':
     user => root,
+    path => "/usr/bin:/bin",
+    onlyif => "ps aux |  grep -vws grep | grep -ws neutron-server"
   }
 
   package { $install_packages: ensure => 'installed' }
