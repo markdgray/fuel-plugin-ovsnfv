@@ -17,9 +17,6 @@ rm -rf ${TMP}
 mkdir -p ${TMP}
 rm -rf ${DIR}/repositories/${BUILD_FOR}/*
 
-# We need git to clone networking-ovs-dpdk repo
-apt-get install -y git
-
 # sudo apt-get install -qq --reinstall --print-uris bash | perl -lne "/'(.*?)'/;print \$1"
 if [ "$INCLUDE_DEPENDENCIES" = true ]
 then
