@@ -21,14 +21,11 @@ then
   wget --content-disposition -N -P ${DIR}/repositories/${BUILD_FOR}/ -i "${DIR}/ovs_package/${BUILD_FOR}/dependencies.txt"
 fi
 
-#wget https://github.com/openvswitch/ovs/archive/${ovs_ref}.zip -O ${DIR}/repositories/${BUILD_FOR}/ovs.zip
-#wget http://www.dpdk.org/browse/dpdk/snapshot/dpdk-${dpdk_ref}.zip -O ${DIR}/repositories/${BUILD_FOR}/dpdk.zip
-
 cd ${TMP}
 
 rm -rf ${TMP}/networking-ovs-dpdk
 git clone https://github.com/openstack/networking-ovs-dpdk ${TMP}/networking-ovs-dpdk
-rm -rf ${TMP}/networking-ovs-dpdk/.git
+#rm -rf ${TMP}/networking-ovs-dpdk/.git #Install requires this to be a git repo
 tar cfz ${DIR}/repositories/${BUILD_FOR}/networking-ovs-dpdk.tgz networking-ovs-dpdk
 
 rm -rf ${TMP}/ovs

@@ -10,6 +10,7 @@ class ovsdpdk::clone(
   $ovs_git_tag             = $::ovsdpdk::params::ovs_git_tag,
   $ovs_dpdk_git_tag        = $::ovsdpdk::params::ovs_dpdk_git_tag,
   $ovs_plugin_git_tag      = $::ovsdpdk::params::ovs_plugin_git_tag,
+  $master_ip               = $::ovsdpdk::params::master_ip,
 ) inherits ovsdpdk {
 
   file { $dest:
@@ -26,22 +27,22 @@ class ovsdpdk::clone(
   }
 
   exec { "wget dpdk":
-    command => "rm -rf dpdk.tgz $ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.tgz && tar xf dpdk.tgz && mv dpdk-2.1.0 $ovs_dpdk_dir",
+    command => "rm -rf dpdk.tgz $ovs_dpdk_dir && wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.tgz && tar xf dpdk.tgz && mv dpdk $ovs_dpdk_dir",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "wget ovs":
-    command => "rm -rf ovs.tgz $ovs_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.tgz && tar xf ovs.tgz && mv ovs-master $ovs_dir",
+    command => "rm -rf ovs.tgz $ovs_dir && wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.tgz && tar xf ovs.tgz && mv ovs $ovs_dir",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "wget networking_ovs_dpdk":
-    command => "rm -rf networking-ovs-dpdk.tgz $networking_ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking-ovs-dpdk.tgz && tar xf networking-ovs-dpdk.tgz && mv networking-ovs-dpdk $networking_ovs_dpdk_dir",
+    command => "rm -rf networking-ovs-dpdk.tgz $networking_ovs_dpdk_dir && wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/networking-ovs-dpdk.tgz && tar xf networking-ovs-dpdk.tgz && mv networking-ovs-dpdk $networking_ovs_dpdk_dir",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "install pbr":
-    command => "wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/pbr-1.8.1-py2.py3-none-any.whl && pip install pbr-1.8.1-py2.py3-none-any.whl",
+    command => "wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/pbr-1.8.1-py2.py3-none-any.whl && pip install pbr-1.8.1-py2.py3-none-any.whl",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
     require => Package['python-pip'],
   }
