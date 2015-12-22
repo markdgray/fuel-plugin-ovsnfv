@@ -7,8 +7,6 @@ DIR="$(dirname `readlink -f $0`)"
 TMP=${DIR}/tmp
 
 INCLUDE_DEPENDENCIES=${INCLUDE_DEPENDENCIES:-true}
-http_proxy=${http_proxy}
-https_proxy=${https_proxy}
 ovs_ref=${ovs_ref:-master}
 dpdk_ref=${dpdk_ref:-2.1.0}
 networking_ovs_dpdk=${networking_ovs_dpdk:-master}
