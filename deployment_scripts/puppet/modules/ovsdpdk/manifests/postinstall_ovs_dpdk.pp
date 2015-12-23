@@ -9,6 +9,7 @@ class ovsdpdk::postinstall_ovs_dpdk (
   $ml2_ovs_conf             = $::ovsdpdk::params::ml2_ovs_conf,
   $neutron_l3_conf          = $::ovsdpdk::params::neutron_l3_conf,
   $openvswitch_agent        = $::ovsdpdk::params::openvswitch_agent,
+  $controller               = $::ovsdpdk::params::controller,
 ) inherits ovsdpdk {
 
   require ovsdpdk::install_ovs_dpdk
@@ -52,7 +53,12 @@ class ovsdpdk::postinstall_ovs_dpdk (
     require => Service["${openvswitch_service_name}"],
   }
 
-  service {'neutron-server': ensure => 'running' }
+  if $controller == 'True' {
+    service {'neutron-server':
+       ensure => 'running',
+    }
+  }
+
   service {"${openvswitch_agent}":
     ensure  => 'running',
     require => [ Exec['restart_ovs'], Service["${openvswitch_service_name}"] ],
