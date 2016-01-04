@@ -6,6 +6,7 @@ if $operatingsystem == 'Ubuntu' {
     ovs_bridge_mappings => '',
     ovs_socket_mem      => '512',
     ovs_num_hugepages   => '256',
+    compute             => 'True',
   }
 } elsif $operatingsystem == 'CentOS' {
 }

@@ -119,7 +119,8 @@ class ovsdpdk (
   $ovs_interface_driver        = 'igb_uio',
   $ovs_patches                 = '',
   $ovs_dpdk_patches            = '',
-  $controller                  = 'False'
+  $controller                  = 'False',
+  $compute                     = 'False',
 ) inherits ::ovsdpdk::params {
 
   include '::ovsdpdk::clone'
