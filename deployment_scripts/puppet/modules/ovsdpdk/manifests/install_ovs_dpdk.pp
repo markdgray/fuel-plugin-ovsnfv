@@ -15,8 +15,7 @@ class ovsdpdk::install_ovs_dpdk (
 
   if $compute == 'True' {
 	  exec {'create_ovs_dpdk':
-	    command => "cp ${networking_ovs_dpdk_dir}/devstack/ovs-dpdk/ovs-dpdk-init /etc/init.d/ovs-dpdk;chmod +x /etc/init.d/ovs-dpdk",
-	    creates => '/etc/init.d/ovs-dpdk',
+	    command => "mv /etc/init.d/openvswitch-switch /etc/init.d/openvswitch-switch.bak;cp ${networking_ovs_dpdk_dir}/devstack/ovs-dpdk/ovs-dpdk-init /etc/init.d/openvswitch-switch;chmod +x /etc/init.d/openvswitch-switch",
 	    user    => root,
 	    path    => ['/usr/bin','/bin'],
 	  }
@@ -29,12 +28,12 @@ class ovsdpdk::install_ovs_dpdk (
 	    require => File['/etc/default/ovs-dpdk'],
 	  }
 
-	  exec { 'update ovs service':
-	    command => "cp ${plugin_dir}/files/${openvswitch_service_file} ${openvswitch_service_path}/${openvswitch_service_file}",
-	    path    => ['/usr/bin','/bin'],
-	    user    => root,
-	    onlyif  => "test -f ${openvswitch_service_path}/${openvswitch_service_file}",
-	  }
+#	  exec { 'update ovs service':
+#	    command => "cp ${plugin_dir}/files/${openvswitch_service_file} ${openvswitch_service_path}/${openvswitch_service_file}",
+#	    path    => ['/usr/bin','/bin'],
+#	    user    => root,
+#	    onlyif  => "test -f ${openvswitch_service_path}/${openvswitch_service_file}",
+#	  }
 
 	  if $::operatingsystem == 'CentOS' {
 	    exec { 'systemctl daemon-reload':
