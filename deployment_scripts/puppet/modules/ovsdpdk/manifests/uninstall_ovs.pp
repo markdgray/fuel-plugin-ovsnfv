@@ -17,10 +17,11 @@ class ovsdpdk::uninstall_ovs (
 	    user => root,
 	  }
 
-	  exec { "/usr/sbin/service ${openvswitch_agent} stop":
-	    user => root,
-	    path => "/usr/bin:/bin",
-	  }
+# This is required for Liberty
+#	  exec { "/usr/sbin/service ${openvswitch_agent} stop":
+#	    user => root,
+#	    path => "/usr/bin:/bin",
+#	  }
   }
 
   if $controller == 'True' {
@@ -37,7 +38,7 @@ class ovsdpdk::uninstall_ovs (
 	  exec { '/sbin/modprobe -r openvswitch':
 	    onlyif  => "/bin/grep -q '^openvswitch' '/proc/modules'",
 	    user    => root,
-	    require => Exec["/usr/sbin/service ${openvswitch_agent} stop"],
+#	    require => Exec["/usr/sbin/service ${openvswitch_agent} stop"],
 	  }
   }
 
