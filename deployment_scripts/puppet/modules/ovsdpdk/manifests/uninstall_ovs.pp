@@ -7,8 +7,6 @@ class ovsdpdk::uninstall_ovs (
   $openvswitch_agent        = $::ovsdpdk::params::openvswitch_agent,
   $install_packages         = $::ovsdpdk::params::install_packages,
   $openvswitch_agent        = $::ovsdpdk::params::openvswitch_agent,
-  $controller               = $::ovsdpdk::params::controller,
-  $compute                  = $::ovsdpdk::params::compute,
 ) inherits ovsdpdk {
 
   #Due to dependencies to other packages, we won't purge vanilla OVS  

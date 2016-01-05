@@ -10,8 +10,6 @@ class ovsdpdk::install_ovs_dpdk (
   $openvswitch_service_file         = $::ovsdpdk::params::openvswitch_service_file,
   $openvswitch_service_path         = $::ovsdpdk::params::openvswitch_service_path,
   $qemu_kvm                         = $::ovsdpdk::params::qemu_kvm,
-  $compute                          = $::ovsdpdk::params::compute,
-  $controller                       = $::ovsdpdk::params::controller,
 ) inherits ovsdpdk {
   require ovsdpdk::build_ovs_dpdk
 

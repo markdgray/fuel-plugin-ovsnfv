@@ -9,8 +9,6 @@ class ovsdpdk::postinstall_ovs_dpdk (
   $ml2_ovs_conf             = $::ovsdpdk::params::ml2_ovs_conf,
   $neutron_l3_conf          = $::ovsdpdk::params::neutron_l3_conf,
   $openvswitch_agent        = $::ovsdpdk::params::openvswitch_agent,
-  $controller               = $::ovsdpdk::params::controller,
-  $compute                  = $::ovsdpdk::params::compute,
 ) inherits ovsdpdk {
 
   require ovsdpdk::install_ovs_dpdk
