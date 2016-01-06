@@ -15,7 +15,7 @@ class ovsdpdk::install_ovs_dpdk (
 
   if $compute == 'True' {
 	  exec {'create_ovs_dpdk':
-	    command => "mv /etc/init.d/openvswitch-switch /etc/init.d/openvswitch-switch.bak;cp ${networking_ovs_dpdk_dir}/devstack/ovs-dpdk/ovs-dpdk-init /etc/init.d/openvswitch-switch;chmod +x /etc/init.d/openvswitch-switch",
+	    command => "mv /etc/init.d/openvswitch-switch /tmp/openvswitch-switch.bak;cp ${networking_ovs_dpdk_dir}/devstack/ovs-dpdk/ovs-dpdk-init /etc/init.d/openvswitch-switch;chmod +x /etc/init.d/openvswitch-switch; ln -sf /etc/init.d/openvswitch-switch /etc/init.d/ovs-dpdk; cp /etc/openvswitch/conf.db /etc/openvswitch/conf.db.pre_dpdk",
 	    user    => root,
 	    path    => ['/usr/bin','/bin'],
 	  }
@@ -59,11 +59,11 @@ class ovsdpdk::install_ovs_dpdk (
 	    require => [ Exec["cp ${qemu_kvm} ${qemu_kvm}.orig"], Package['qemu-kvm'] ],
 	  }
 
-	  exec {'init ovs-dpdk':
-	    command => '/etc/init.d/ovs-dpdk init',
-	    user    => root,
-	    require => [ Exec['create_ovs_dpdk'], File['/etc/default/ovs-dpdk'] ],
-	  }
+#exec {'init ovs-dpdk':
+#command => '/etc/init.d/ovs-dpdk init',
+#user    => root,
+#require => [ Exec['create_ovs_dpdk'], File['/etc/default/ovs-dpdk'] ],
+#}
   }
 
   # install mech driver

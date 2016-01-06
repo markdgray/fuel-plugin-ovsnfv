@@ -41,7 +41,6 @@ class ovsdpdk::postinstall_ovs_dpdk (
 	    require => Package['crudini'],
 	  }
 
-	  exec { "${plugin_dir}/files/configure_bridges.sh ${ovs_datapath_type}": }
 
 	  service {"${openvswitch_service_name}": ensure => 'running' }
 
@@ -52,6 +51,11 @@ class ovsdpdk::postinstall_ovs_dpdk (
 	    user    => root,
 	    require => Service["${openvswitch_service_name}"],
 	  }
+
+	  exec { "${plugin_dir}/files/configure_bridges.sh ${ovs_datapath_type}":
+        user    => root,
+        require => Exec['restart_ovs'],
+      }
   }
 
   if $controller == 'True' {
