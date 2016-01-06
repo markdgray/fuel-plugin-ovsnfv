@@ -26,12 +26,12 @@ class ovsdpdk::clone(
   }
 
   exec { "wget dpdk":
-    command => "rm -rf dpdk.tgz $ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.tgz && tar xf dpdk.tgz && mv dpdk-2.1.0 $ovs_dpdk_dir",
+    command => "rm -rf dpdk.tgz $ovs_dpdk_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/dpdk.tgz && tar xf dpdk.tgz && mv dpdk $ovs_dpdk_dir",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
   exec { "wget ovs":
-    command => "rm -rf ovs.tgz $ovs_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.tgz && tar xf ovs.tgz && mv ovs-master $ovs_dir",
+    command => "rm -rf ovs.tgz $ovs_dir && wget http://10.20.0.2:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/ovs.tgz && tar xf ovs.tgz && mv ovs $ovs_dir",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
