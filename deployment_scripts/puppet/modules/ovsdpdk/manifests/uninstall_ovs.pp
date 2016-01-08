@@ -9,7 +9,7 @@ class ovsdpdk::uninstall_ovs (
   $openvswitch_agent        = $::ovsdpdk::params::openvswitch_agent,
 ) inherits ovsdpdk {
 
-  #Due to dependencies to other packages, we won't purge vanilla OVS  
+  #Due to dependencies to other packages, we won't purge vanilla OVS
   #package { $remove_packages: ensure => 'purged' }
 
   if $compute == 'True' {
@@ -26,9 +26,9 @@ class ovsdpdk::uninstall_ovs (
 
   if $controller == 'True' {
 	  exec { '/usr/sbin/service neutron-server stop':
-	    user => root,
-	    path => "/usr/bin:/bin",
-	    onlyif => "ps aux |  grep -vws grep | grep -ws neutron-server"
+	    user   => root,
+	    path   => ["/usr/bin", "/bin", "/sbin"],
+	    onlyif => "ps aux | grep -vws grep | grep -ws neutron-server",
 	  }
   }
 
