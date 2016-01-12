@@ -41,6 +41,16 @@ class ovsdpdk::clone(
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",
   }
 
+  exec { "wget qemu":
+    command => "rm -rf qemu-2.2.1.tar.bz2 /opt/code/qemu && wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/qemu-2.2.1.tar.bz2 && tar xf qemu-2.2.1.tar.bz2 && mv qemu-2.2.1 /opt/code/qemu",
+    path    => "/usr/bin:/usr/sbin:/bin:/sbin",
+  }
+
+  exec { "wget libvirt":
+    command => "rm -rf libvirt-1.2.12.tar.gz /opt/code/libvirt && wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/libvirt-1.2.12.tar.gz && tar xf libvirt-1.2.12.tar.gz && mv libvirt-1.2.12 /opt/code/libvirt",
+    path    => "/usr/bin:/usr/sbin:/bin:/sbin",
+  }
+
   exec { "install pbr":
     command => "wget http://$master_ip:8080/plugins/fuel-plugin-ovsnfv-0.0/repositories/ubuntu/pbr-1.8.1-py2.py3-none-any.whl && pip install pbr-1.8.1-py2.py3-none-any.whl",
     path    => "/usr/bin:/usr/sbin:/bin:/sbin",

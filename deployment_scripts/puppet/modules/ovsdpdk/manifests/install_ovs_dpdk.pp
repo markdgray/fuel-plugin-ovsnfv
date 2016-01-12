@@ -43,20 +43,78 @@ class ovsdpdk::install_ovs_dpdk (
 	    }
 	  }
 
-	  package {'qemu-kvm': ensure => installed }
+         package { 'zlib1g-dev':
+           ensure   => installed,
+         }
+
+         package { 'libglib2.0-dev':
+           ensure   => installed,
+         }
+
+         package { 'libxml2-dev':
+           ensure   => installed,
+         }
+
+         package { 'libdevmapper-dev':
+           ensure   => installed,
+         }
+
+         package { 'libpciaccess-dev':
+           ensure   => installed,
+         }
+
+         package { 'libnl-dev':
+           ensure   => installed,
+         }
+
+         package { 'pkg-config':
+           ensure   => installed,
+         }
+
+         package { 'bison':
+           ensure   => installed,
+         }
+
+         package { 'flex':
+           ensure   => installed,
+         }
+
+         package { 'libyajl2':
+           ensure   => installed,
+         }
+
+         package { 'libyajl-dev':
+           ensure   => installed,
+         }
+
+         exec {'build qemu':
+           command => "true && cd /opt/code/qemu && ./configure --enable-kvm --target-list=x86_64-softmmu && make && make install",
+           user    => root,
+           path    => ['/usr/bin','/bin'],
+           require => [ Package['flex'], Package['bison'], Package['pkg-config'], Package['libnl-dev'], Package['libpciaccess-dev'], Package['libdevmapper-dev'], Package['libxml2-dev'], Package['libglib2.0-dev'], Package['zlib1g-dev']],
+           timeout => 0,
+         }
+
+          exec {'build libvirt':
+           command => "true && cd /opt/code/libvirt && ./configure --prefix=/usr && make && make install",
+           user    => root,
+           path    => ['/usr/bin','/bin'],
+           require => [Exec['build qemu'], Package['libyajl2'], Package['libyajl-dev']],
+           timeout => 0,
+         }
 
 	  exec { "cp ${qemu_kvm} ${qemu_kvm}.orig":
 	    path    => ['/usr/bin','/bin'],
 	    user    => root,
 	    onlyif  => "test -f ${qemu_kvm}",
-	    require => Package['qemu-kvm'],
+	    require => Exec['build qemu'],
 	  }
 
 	  exec { "cp ${plugin_dir}/files/kvm-wrapper.sh ${qemu_kvm};chmod +x ${qemu_kvm}":
 	    path    => ['/usr/bin','/bin'],
 	    user    => root,
 	    onlyif  => "test -f ${qemu_kvm}",
-	    require => [ Exec["cp ${qemu_kvm} ${qemu_kvm}.orig"], Package['qemu-kvm'] ],
+	    require => [ Exec["cp ${qemu_kvm} ${qemu_kvm}.orig"], Exec['build qemu'] ],
 	  }
 
 #exec {'init ovs-dpdk':
@@ -64,6 +122,10 @@ class ovsdpdk::install_ovs_dpdk (
 #user    => root,
 #require => [ Exec['create_ovs_dpdk'], File['/etc/default/ovs-dpdk'] ],
 #}
+  }
+
+  package { 'bc':
+    ensure   => installed,
   }
 
   # install mech driver
